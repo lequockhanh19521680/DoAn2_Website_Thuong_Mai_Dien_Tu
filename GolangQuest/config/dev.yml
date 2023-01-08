@@ -1,0 +1,24 @@
+PORT: 8082
+
+# For CICD
+VERSION: v0.1.0 # must follow pattern vXX.XX.XX for auto tag in CI
+
+DB_HOST: localhost
+DB_PORT: 3306
+DB_NAME: ecommerce_db
+DB_USER: admin
+DB_PASSWORD: admin
+
+CLOUDINARY:
+  NAME: "damzcas3k"
+  API_KEY: "332611833886276"
+  API_SECRET: "CApeUOYt-JIgUSj9LvSAs6rO610"
+  SECURE: true
+
+
+# 24h
+ACCESS_TOKEN_EXPIRE_IN_MINUTE: 1440
+# 7 days
+REFRESH_TOKEN_EXPIRE_IN_DAYS: 7
+TOKEN_SECRET: "SuPerSecreTBeliEvEmE"
+

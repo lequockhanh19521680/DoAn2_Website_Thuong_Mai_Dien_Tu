@@ -1,0 +1,53 @@
+version: '3.9'
+services:
+#  app:
+#    build:
+#      context: .
+#      target: dev
+#      dockerfile: Base.Dockerfile
+#    ports:
+#      - "8080:8080"
+#    restart: always
+#    environment:
+#      - DB_HOST=localhost
+#      - DB_PORT=3306
+#      - DB_NAME=ecommerce_db
+#      - DB_USER=admin
+#      - DB_PASSWORD=admin
+#    volumes:
+#      - $HOME/.aws:/root/.aws:ro
+#      - .:/app
+#    command: ["go", "run", "."]
+    # command: ["sleep", "54000"]
+
+  db:
+    image: 'mysql:8.0.31-debian'
+    platform: linux/x86_64
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ecommerce_db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: db_host
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+
+    restart: always
+    ports:
+      - 3333:80
+
+volumes:
+  dbdata:
